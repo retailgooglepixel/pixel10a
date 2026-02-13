@@ -139,25 +139,22 @@
     <!-- Header Section -->
     <header class="relative w-full h-[60vh] min-h-[400px] overflow-hidden">
         <!-- Background Image -->
+        <!-- object-[center_35%] positions the image focus slightly above center to likely catch the camera bar -->
         <img src="https://i.postimg.cc/x1dttxDg/Bildschirmfoto-2026-02-13-um-13-20-16.png" 
              alt="Pixel 10a Header" 
-             class="absolute inset-0 w-full h-full object-cover object-center">
+             class="absolute inset-0 w-full h-full object-cover object-[center_35%]">
         
-        <!-- Gradient Overlay for Readability -->
-        <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
+        <!-- Gradient Overlay - More transparent at top to show camera bar, darker at bottom for button readability -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
         
-        <!-- Content Container - Left Aligned -->
-        <div class="absolute inset-0 flex flex-col justify-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div class="max-w-xl text-left fade-in-up">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-md">
-                    Bereit für das<br>neue Pixel?
-                </h1>
-                <a href="https://googleretailtraining.exceedlms.com/student/catalog" target="_blank" 
-                   class="btn-primary px-8 py-3 text-lg font-medium inline-flex items-center gap-2 delay-100 shadow-lg hover:shadow-xl transform transition-transform hover:-translate-y-1">
-                    Mehr erfahren
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </a>
-            </div>
+        <!-- Content Container - Bottom Center -->
+        <div class="absolute inset-0 flex flex-col justify-end items-center pb-24 px-4 pointer-events-none">
+            <!-- Button (pointer-events-auto ensures it's clickable inside the none-container) -->
+            <a href="https://googleretailtraining.exceedlms.com/student/catalog" target="_blank" 
+               class="btn-primary pointer-events-auto px-8 py-3 text-lg font-medium inline-flex items-center gap-2 fade-in-up delay-100 shadow-lg hover:shadow-xl transform transition-transform hover:-translate-y-1">
+                Mehr erfahren
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
         </div>
     </header>
 
@@ -236,7 +233,6 @@
         <section id="infosheet" class="scroll-mt-32 fade-in-up delay-300">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold text-gray-900 mb-3">Dein Spickzettel für den Verkauf</h2>
-                <!-- Subtext removed as requested -->
             </div>
 
             <div class="max-w-4xl mx-auto">
