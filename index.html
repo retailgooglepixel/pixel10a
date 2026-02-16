@@ -12,11 +12,18 @@
     
     <style>
         body {
-            font-family: 'Google Sans', sans-serif;
+            font-family: 'Google Sans', sans-serif !important;
             background-color: #f8f9fa;
             color: #202124;
             overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent; /* Entfernt grauen Highlight-Box auf Mobile */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Define brand colors */
+        :root {
+            --brand-blue: #81a0f4;
+            --brand-red: #ff5661;
+            --brand-gray: #d9e3dc;
         }
 
         /* Animations */
@@ -39,7 +46,7 @@
 
         /* Glassmorphism Tiles */
         .glass-tile {
-            background: rgba(255, 255, 255, 0.9); /* Etwas deckender für bessere Lesbarkeit auf Mobile */
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.8);
@@ -67,44 +74,50 @@
 
         /* Button Styles */
         .btn-primary {
-            background-color: #1a73e8;
+            background-color: #ff5661; /* Brand Red */
             color: white;
             transition: all 0.3s ease;
             border-radius: 9999px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         }
+        .btn-primary:hover {
+            background-color: #ff3b48;
+            box-shadow: 0 4px 12px rgba(255, 86, 97, 0.3);
+        }
         .btn-primary:active {
-            background-color: #1557b0;
             transform: translateY(1px);
         }
         
         .btn-outline {
             background-color: transparent;
-            color: #1a73e8;
-            border: 1px solid #dadce0;
+            color: #ff5661;
+            border: 1px solid #d9e3dc;
             transition: all 0.2s ease;
             border-radius: 9999px;
         }
         .btn-outline:active {
-            background-color: #e8f0fe;
+            background-color: #fff0f1;
         }
         
-        /* Desktop Hover state for outline button */
         @media (min-width: 768px) {
             .btn-outline:hover, .training-card:hover .btn-outline {
-                background-color: #1a73e8;
+                background-color: #ff5661;
                 color: white;
-                border-color: #1a73e8;
+                border-color: #ff5661;
             }
         }
 
         /* Gradient Text */
         .text-gradient {
-            background: linear-gradient(90deg, #4285F4, #9B72CB, #EA4335, #FBBC04);
+            background: linear-gradient(90deg, #81a0f4, #ff5661, #d9e3dc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: 200% auto;
             animation: shine 5s linear infinite;
+        }
+        
+        .bg-gradient-brand {
+            background: linear-gradient(90deg, #81a0f4, #ff5661, #d9e3dc);
         }
 
         @keyframes shine {
@@ -122,7 +135,6 @@
             background-color: #fff;
         }
         
-        /* Pulse Animation for Download Hint */
         @keyframes pulse-soft {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.05); opacity: 0.9; }
@@ -141,7 +153,7 @@
             box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
         }
         .toggle-btn {
-            padding: 10px 24px; /* Größer für Touch */
+            padding: 10px 24px;
             border-radius: 9999px;
             font-weight: 500;
             cursor: pointer;
@@ -153,27 +165,33 @@
             -webkit-user-select: none;
         }
         .toggle-btn.active {
-            color: #1967d2;
+            color: #ff5661;
             background-color: white;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             font-weight: 700;
         }
+        
+        /* Custom Text Colors */
+        .text-brand-red { color: #ff5661; }
+        .text-brand-blue { color: #81a0f4; }
+        .bg-brand-blue-light { background-color: rgba(129, 160, 244, 0.15); }
+        .bg-brand-red-light { background-color: rgba(255, 86, 97, 0.1); }
+        .bg-brand-green-light { background-color: rgba(217, 227, 220, 0.4); }
+        .bg-brand-yellow-light { background-color: rgba(251, 188, 4, 0.15); }
+        .text-brand-yellow { color: #fbbc04; }
+        
     </style>
 </head>
 <body>
 
     <!-- Header Section -->
     <header class="relative w-full h-[50vh] min-h-[350px] md:h-[60vh] overflow-hidden">
-        <!-- Background Image -->
-        <!-- Mobile Optimization: object-top ensures the camera bar is visible in portrait mode -->
-        <img src="https://i.postimg.cc/HxKr1LVV/Bildschirmfoto-2026-02-13-um-13-37-11.png" 
+        <img src="https://i.postimg.cc/3JzSv9vW/Bildschirmfoto-2026-02-16-um-14-12-48.png" 
              alt="Pixel 10a Header" 
-             class="absolute inset-0 w-full h-full object-cover object-[center_30%] md:object-[center_35%]">
+             class="absolute inset-0 w-full h-full object-cover object-center">
         
-        <!-- Gradient Overlay -->
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
         
-        <!-- Content Container -->
         <div class="absolute inset-0 flex flex-col justify-end items-center pb-20 md:pb-24 px-4 pointer-events-none">
             <a href="https://googleretailtraining.exceedlms.com/student/catalog" target="_blank" 
                class="btn-primary pointer-events-auto px-6 py-3 md:px-8 md:py-3 text-base md:text-lg font-medium inline-flex items-center gap-2 fade-in-up delay-100 transform active:scale-95 transition-transform">
@@ -184,14 +202,12 @@
     </header>
 
     <!-- Quick Navigation (Glass Tiles) -->
-    <!-- Pull negative margin adjusted for mobile to prevent overlap issues -->
     <div class="relative -mt-8 md:-mt-10 z-20 px-4 mb-12 md:mb-16">
-        <!-- Changed to max-w-4xl and grid-cols-2 to balance the 2 items nicely -->
-        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             
             <!-- Tile 1: Training -->
             <a href="#booking" class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200 tap-highlight-transparent">
-                <div class="bg-blue-100 p-3 rounded-full text-blue-600 md:group-hover:bg-blue-600 md:group-hover:text-white transition-colors shrink-0">
+                <div class="bg-brand-blue-light p-3 rounded-full text-brand-blue md:group-hover:bg-[#81a0f4] md:group-hover:text-white transition-colors shrink-0">
                     <i data-lucide="calendar-check" class="w-6 h-6"></i>
                 </div>
                 <div class="flex-1">
@@ -201,9 +217,21 @@
                 <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
             </a>
 
-            <!-- Tile 2: Infosheet (Previously Tile 3, now position 2) -->
+            <!-- Tile 2: Neueste Funktionen (NEW) -->
+            <a href="https://docs.google.com/presentation/d/1ylNj_EwhR0U7ukoVJKhYpDZwO7-iVckumRrs9bYQIYs/present?slide=id.p" target="_blank" class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200 tap-highlight-transparent">
+                <div class="bg-brand-yellow-light p-3 rounded-full text-brand-yellow md:group-hover:bg-[#fbbc04] md:group-hover:text-white transition-colors shrink-0">
+                    <i data-lucide="sparkles" class="w-6 h-6"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-bold text-gray-900 text-lg">Neueste Funktionen</h3>
+                    <p class="text-sm text-gray-600">Interaktives Infoblatt</p>
+                </div>
+                <i data-lucide="external-link" class="w-5 h-5 text-gray-400"></i>
+            </a>
+
+            <!-- Tile 3: Infosheet -->
             <a href="#infosheet" class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200">
-                <div class="bg-green-100 p-3 rounded-full text-green-600 md:group-hover:bg-green-600 md:group-hover:text-white transition-colors shrink-0">
+                <div class="bg-brand-green-light p-3 rounded-full text-gray-600 md:group-hover:bg-[#d9e3dc] md:group-hover:text-gray-900 transition-colors shrink-0">
                     <i data-lucide="file-text" class="w-6 h-6"></i>
                 </div>
                 <div class="flex-1">
@@ -221,7 +249,7 @@
         <!-- Intro & Video Section -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center fade-in-up delay-300">
             <div class="space-y-4 md:space-y-6 order-2 lg:order-1">
-                <span class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs md:text-sm font-semibold tracking-wide uppercase">
+                <span class="inline-block px-3 py-1 rounded-full bg-brand-blue-light text-brand-blue text-xs md:text-sm font-semibold tracking-wide uppercase">
                     Video Übersicht
                 </span>
                 <h2 class="text-2xl md:text-4xl font-bold text-gray-900 leading-tight">
@@ -252,23 +280,19 @@
 
             <div class="max-w-4xl mx-auto">
                 <a href="https://drive.google.com/file/d/1PJT1cWFvj8lA233RijqoAWiRq2n6h9F5/view?usp=drive_link" target="_blank" class="block group relative active:scale-[0.99] transition-transform">
-                    <!-- Adjusted container to fit image better -->
                     <div class="infosheet-container bg-gray-50 border border-gray-200 shadow-lg rounded-2xl md:rounded-3xl overflow-hidden relative">
-                        
-                        <!-- Image with better fit -->
                         <img src="https://i.postimg.cc/9F8wwdVJ/Bildschirmfoto-2026-02-12-um-17-47-55.png" 
                              alt="Infosheet Preview" 
                              class="w-full h-auto block object-cover">
                         
-                        <!-- Permanent Overlay Button - Small, Bottom Right -->
                         <div class="absolute bottom-4 right-4 z-10">
-                            <div class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-xl flex items-center gap-2 animate-pulse-soft">
+                            <!-- Button using new Brand Red -->
+                            <div class="bg-[#ff5661] text-white px-4 py-2 rounded-full text-sm font-medium shadow-xl flex items-center gap-2 animate-pulse-soft">
                                 <i data-lucide="download" class="w-4 h-4"></i>
                                 <span>Klick mich</span>
                             </div>
                         </div>
 
-                        <!-- Hover Overlay (Subtle Darkening) -->
                         <div class="absolute inset-0 bg-black/0 md:group-hover:bg-black/10 transition-colors duration-300"></div>
                     </div>
                 </a>
@@ -295,7 +319,6 @@
                 <!-- Cards will be injected here via JS -->
             </div>
             
-            <!-- Empty State Message (hidden by default) -->
             <div id="empty-state" class="hidden text-center py-12 text-gray-500">
                 <i data-lucide="calendar-x" class="w-12 h-12 mx-auto mb-3 opacity-50"></i>
                 <p>Keine Termine für diesen Zeitraum gefunden.</p>
@@ -318,12 +341,11 @@
 
     <!-- Scripts -->
     <script>
-        // Global Variables
-        let currentMonth = '02'; // Default to February
+        let currentMonth = '02';
         let trainingSessionsData = [];
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Data Initialization (Februar & März)
+            // Data Initialization
             trainingSessionsData = [
                 // Februar Termine
                 { id: 101, title: "Neues von Pixel!", date: "2026-02-24", time: "09:00", duration: 30, link: "meet.google.com/kxn-skbq-vpo" },
@@ -335,7 +357,7 @@
                 { id: 107, title: "Neues von Pixel!", date: "2026-02-27", time: "09:00", duration: 30, link: "meet.google.com/kxn-skbq-vpo" },
                 { id: 108, title: "Neues von Pixel!", date: "2026-02-27", time: "14:00", duration: 30, link: "meet.google.com/ave-uopt-vyc" },
 
-                // März Termine (aus CSV)
+                // März Termine
                 { id: 1, title: "Neues von Pixel!", date: "2026-03-03", time: "09:00", duration: 30, link: "meet.google.com/kxn-skbq-vpo" },
                 { id: 2, title: "Neues von Pixel!", date: "2026-03-03", time: "14:00", duration: 30, link: "meet.google.com/ave-uopt-vyc" },
                 { id: 3, title: "Neues von Pixel!", date: "2026-03-04", time: "09:00", duration: 30, link: "meet.google.com/kxn-skbq-vpo" },
@@ -348,34 +370,25 @@
                 { id: 10, title: "Neues von Pixel!", date: "2026-03-10", time: "14:00", duration: 30, link: "meet.google.com/ave-uopt-vyc" }
             ];
 
-            // Initial Render
             renderGrid(currentMonth);
 
-            // Initialize Lucide Icons
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
         });
 
-        // Function to switch months
         function setMonth(month) {
             currentMonth = month;
-            
-            // Update UI Buttons
             document.getElementById('btn-feb').className = month === '02' ? 'toggle-btn active' : 'toggle-btn';
             document.getElementById('btn-mar').className = month === '03' ? 'toggle-btn active' : 'toggle-btn';
-
-            // Re-render grid
             renderGrid(month);
         }
 
-        // Function to render the grid based on month
         function renderGrid(month) {
             const grid = document.getElementById('training-grid');
             const emptyState = document.getElementById('empty-state');
-            grid.innerHTML = ''; // Clear existing
+            grid.innerHTML = '';
 
-            // Filter sessions based on selected month (Format YYYY-MM-DD)
             const filteredSessions = trainingSessionsData.filter(session => {
                 const sessionMonth = session.date.split('-')[1];
                 return sessionMonth === month;
@@ -389,18 +402,17 @@
                 emptyState.classList.add('hidden');
 
                 filteredSessions.forEach((session, index) => {
-                    const globalIndex = trainingSessionsData.indexOf(session); // Get real index for download
+                    const globalIndex = trainingSessionsData.indexOf(session);
                     const card = document.createElement('div');
                     card.className = 'training-card group relative bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-xl h-full flex flex-col animate-fade-in';
-                    
-                    // Small animation delay for staggered effect
                     card.style.animationDelay = `${index * 50}ms`;
 
                     card.innerHTML = `
-                        <div class="h-1.5 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-yellow-500"></div>
+                        <!-- Gradient Bar using updated colors -->
+                        <div class="h-1.5 w-full bg-gradient-brand"></div>
                         <div class="p-5 md:p-6 flex-1 flex flex-col">
                             <div class="flex justify-between items-start mb-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-blue-light text-brand-blue">
                                     ${session.duration} Min
                                 </span>
                             </div>
@@ -409,16 +421,16 @@
                             
                             <div class="space-y-3 mb-6 md:mb-8 flex-1">
                                 <div class="flex items-center text-gray-700">
-                                    <i data-lucide="calendar" class="w-5 h-5 mr-3 text-blue-600"></i>
+                                    <i data-lucide="calendar" class="w-5 h-5 mr-3 text-brand-red"></i>
                                     <span class="font-medium text-base md:text-lg">${formatDateGerman(session.date)}</span>
                                 </div>
                                 <div class="flex items-center text-gray-700">
-                                    <i data-lucide="clock" class="w-5 h-5 mr-3 text-blue-600"></i>
+                                    <i data-lucide="clock" class="w-5 h-5 mr-3 text-brand-red"></i>
                                     <span class="font-medium text-base md:text-lg">${session.time} Uhr</span>
                                 </div>
                             </div>
                             
-                            <button onclick="downloadICS(event, ${globalIndex})" class="w-full btn-outline py-2.5 px-4 rounded-full text-sm font-bold flex items-center justify-center gap-2 active:bg-blue-600 active:text-white transition-all duration-300 touch-manipulation">
+                            <button onclick="downloadICS(event, ${globalIndex})" class="w-full btn-outline py-2.5 px-4 rounded-full text-sm font-bold flex items-center justify-center gap-2 active:bg-[#ff5661] active:text-white transition-all duration-300 touch-manipulation">
                                 <i data-lucide="download" class="w-4 h-4"></i>
                                 Termin speichern
                             </button>
@@ -428,16 +440,12 @@
                 });
             }
 
-            // Re-init icons for new elements
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
-
-            // Re-attach 3D Tilt Logic
             attachTiltEffect();
         }
 
-        // 3D Tilt Effect Logic (Desktop Only)
         function attachTiltEffect() {
             if (window.matchMedia("(min-width: 768px)").matches) {
                 document.querySelectorAll('.training-card').forEach(card => {
@@ -479,7 +487,6 @@
 
             try {
                 const startTimeStr = session.date.replace(/-/g, '') + 'T' + session.time.replace(':', '') + '00';
-                
                 const [y, m, d] = session.date.split('-').map(Number);
                 const [h, min] = session.time.split(':').map(Number);
                 const dateObj = new Date(y, m - 1, d, h, min + session.duration); 
