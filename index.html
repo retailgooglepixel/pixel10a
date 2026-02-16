@@ -16,7 +16,7 @@
             background-color: #f8f9fa;
             color: #202124;
             overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
+            -webkit-tap-highlight-color: transparent; /* Entfernt grauen Highlight-Box auf Mobile */
         }
 
         /* Animations */
@@ -39,23 +39,17 @@
 
         /* Glassmorphism Tiles */
         .glass-tile {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9); /* Etwas deckender für bessere Lesbarkeit auf Mobile */
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-tile:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-            border-color: #1a73e8;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-tile:active {
-            transform: scale(0.98);
+            transform: scale(0.96);
+            background: #f1f3f4;
         }
 
         /* 3D Tile Effect (Desktop Only) */
@@ -77,10 +71,11 @@
             color: white;
             transition: all 0.3s ease;
             border-radius: 9999px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         }
-        .btn-primary:hover {
+        .btn-primary:active {
             background-color: #1557b0;
-            box-shadow: 0 4px 12px rgba(26,115,232,0.3);
+            transform: translateY(1px);
         }
         
         .btn-outline {
@@ -90,10 +85,17 @@
             transition: all 0.2s ease;
             border-radius: 9999px;
         }
-        .btn-outline:hover, .training-card:hover .btn-outline {
-            background-color: #1a73e8;
-            color: white;
-            border-color: #1a73e8;
+        .btn-outline:active {
+            background-color: #e8f0fe;
+        }
+        
+        /* Desktop Hover state for outline button */
+        @media (min-width: 768px) {
+            .btn-outline:hover, .training-card:hover .btn-outline {
+                background-color: #1a73e8;
+                color: white;
+                border-color: #1a73e8;
+            }
         }
 
         /* Gradient Text */
@@ -119,10 +121,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             background-color: #fff;
         }
-        .infosheet-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
         
         /* Pulse Animation for Download Hint */
         @keyframes pulse-soft {
@@ -135,14 +133,15 @@
 
         /* Toggle Switch Styles */
         .toggle-container {
-            background: #e8eaed;
+            background: #f1f3f4;
             border-radius: 9999px;
             padding: 4px;
             display: inline-flex;
             position: relative;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
         }
         .toggle-btn {
-            padding: 8px 24px;
+            padding: 10px 24px; /* Größer für Touch */
             border-radius: 9999px;
             font-weight: 500;
             cursor: pointer;
@@ -150,32 +149,34 @@
             position: relative;
             z-index: 1;
             color: #5f6368;
+            user-select: none;
+            -webkit-user-select: none;
         }
         .toggle-btn.active {
-            color: #1a73e8;
+            color: #1967d2;
             background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
 
     <!-- Header Section -->
-    <header class="relative w-full h-[60vh] min-h-[400px] overflow-hidden">
+    <header class="relative w-full h-[50vh] min-h-[350px] md:h-[60vh] overflow-hidden">
         <!-- Background Image -->
-        <!-- object-[center_35%] positions the image focus slightly above center to likely catch the camera bar -->
+        <!-- Mobile Optimization: object-top ensures the camera bar is visible in portrait mode -->
         <img src="https://i.postimg.cc/HxKr1LVV/Bildschirmfoto-2026-02-13-um-13-37-11.png" 
              alt="Pixel 10a Header" 
-             class="absolute inset-0 w-full h-full object-cover object-[center_35%]">
+             class="absolute inset-0 w-full h-full object-cover object-[center_30%] md:object-[center_35%]">
         
-        <!-- Gradient Overlay - More transparent at top to show camera bar, darker at bottom for button readability -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
         
-        <!-- Content Container - Bottom Center -->
-        <div class="absolute inset-0 flex flex-col justify-end items-center pb-24 px-4 pointer-events-none">
-            <!-- Button (pointer-events-auto ensures it's clickable inside the none-container) -->
+        <!-- Content Container -->
+        <div class="absolute inset-0 flex flex-col justify-end items-center pb-20 md:pb-24 px-4 pointer-events-none">
             <a href="https://googleretailtraining.exceedlms.com/student/catalog" target="_blank" 
-               class="btn-primary pointer-events-auto px-8 py-3 text-lg font-medium inline-flex items-center gap-2 fade-in-up delay-100 shadow-lg hover:shadow-xl transform transition-transform hover:-translate-y-1">
+               class="btn-primary pointer-events-auto px-6 py-3 md:px-8 md:py-3 text-base md:text-lg font-medium inline-flex items-center gap-2 fade-in-up delay-100 transform active:scale-95 transition-transform">
                 Mehr erfahren
                 <i data-lucide="arrow-right" class="w-5 h-5"></i>
             </a>
@@ -183,66 +184,56 @@
     </header>
 
     <!-- Quick Navigation (Glass Tiles) -->
-    <div class="relative -mt-10 z-20 px-4 mb-16">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Pull negative margin adjusted for mobile to prevent overlap issues -->
+    <div class="relative -mt-8 md:-mt-10 z-20 px-4 mb-12 md:mb-16">
+        <!-- Changed to max-w-4xl and grid-cols-2 to balance the 2 items nicely -->
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             
             <!-- Tile 1: Training -->
-            <a href="#booking" class="glass-tile rounded-2xl p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200">
-                <div class="bg-blue-100 p-3 rounded-full text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors shrink-0">
+            <a href="#booking" class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200 tap-highlight-transparent">
+                <div class="bg-blue-100 p-3 rounded-full text-blue-600 md:group-hover:bg-blue-600 md:group-hover:text-white transition-colors shrink-0">
                     <i data-lucide="calendar-check" class="w-6 h-6"></i>
                 </div>
-                <div>
+                <div class="flex-1">
                     <h3 class="font-bold text-gray-900 text-lg">Live Trainings</h3>
-                    <p class="text-sm text-gray-600 mt-1">Sichere dir deinen Platz</p>
+                    <p class="text-sm text-gray-600">Platz sichern</p>
                 </div>
-                <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400 ml-auto md:hidden"></i>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
             </a>
 
-            <!-- Tile 2: More Info (LMS) -->
-            <a href="https://googleretailtraining.exceedlms.com/student/catalog" target="_blank" class="glass-tile rounded-2xl p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200">
-                <div class="bg-yellow-100 p-3 rounded-full text-yellow-600 group-hover:bg-yellow-500 group-hover:text-white transition-colors shrink-0">
-                    <i data-lucide="book-open" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold text-gray-900 text-lg">Mehr Infos</h3>
-                    <p class="text-sm text-gray-600 mt-1">Im Learning Management System</p>
-                </div>
-                <i data-lucide="external-link" class="w-5 h-5 text-gray-400 ml-auto md:hidden"></i>
-            </a>
-
-            <!-- Tile 3: Infosheet -->
-            <a href="#infosheet" class="glass-tile rounded-2xl p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200">
-                <div class="bg-green-100 p-3 rounded-full text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors shrink-0">
+            <!-- Tile 2: Infosheet (Previously Tile 3, now position 2) -->
+            <a href="#infosheet" class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200">
+                <div class="bg-green-100 p-3 rounded-full text-green-600 md:group-hover:bg-green-600 md:group-hover:text-white transition-colors shrink-0">
                     <i data-lucide="file-text" class="w-6 h-6"></i>
                 </div>
-                <div>
+                <div class="flex-1">
                     <h3 class="font-bold text-gray-900 text-lg">Spickzettel</h3>
-                    <p class="text-sm text-gray-600 mt-1">Für den Verkauf</p>
+                    <p class="text-sm text-gray-600">Download</p>
                 </div>
-                <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400 ml-auto md:hidden"></i>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
             </a>
 
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-24">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-16 md:space-y-24">
 
         <!-- Intro & Video Section -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-in-up delay-300">
-            <div class="space-y-6 order-2 lg:order-1">
-                <span class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold tracking-wide uppercase">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center fade-in-up delay-300">
+            <div class="space-y-4 md:space-y-6 order-2 lg:order-1">
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs md:text-sm font-semibold tracking-wide uppercase">
                     Video Übersicht
                 </span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+                <h2 class="text-2xl md:text-4xl font-bold text-gray-900 leading-tight">
                     Alles was du wissen musst.<br>
                     <span class="text-gradient">Kompakt erklärt.</span>
                 </h2>
-                <p class="text-lg text-gray-600 leading-relaxed">
+                <p class="text-base md:text-lg text-gray-600 leading-relaxed">
                     Entdecke die Features, die das Pixel 10a zum Preis-Leistungs-Sieger machen. Von der verbesserten Kamera bis zur KI-Integration – hier erhältst du den schnellen Überblick.
                 </p>
             </div>
             
-            <div class="order-1 lg:order-2 aspect-video w-full rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gray-900/5 bg-gray-100">
+            <div class="order-1 lg:order-2 aspect-video w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gray-900/5 bg-gray-100">
                 <!-- Youtube Placeholder -->
                 <iframe class="w-full h-full" 
                         src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=placeholder" 
@@ -254,15 +245,15 @@
         </section>
 
         <!-- Infosheet Download Section -->
-        <section id="infosheet" class="scroll-mt-32 fade-in-up delay-300">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-gray-900 mb-3">Dein Spickzettel für den Verkauf</h2>
+        <section id="infosheet" class="scroll-mt-28 md:scroll-mt-32 fade-in-up delay-300">
+            <div class="text-center mb-8 md:mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2 md:mb-3">Dein Spickzettel für den Verkauf</h2>
             </div>
 
             <div class="max-w-4xl mx-auto">
-                <a href="https://drive.google.com/file/d/1PJT1cWFvj8lA233RijqoAWiRq2n6h9F5/view?usp=drive_link" target="_blank" class="block group relative">
+                <a href="https://drive.google.com/file/d/1PJT1cWFvj8lA233RijqoAWiRq2n6h9F5/view?usp=drive_link" target="_blank" class="block group relative active:scale-[0.99] transition-transform">
                     <!-- Adjusted container to fit image better -->
-                    <div class="infosheet-container bg-gray-50 border border-gray-200 shadow-lg rounded-3xl overflow-hidden relative">
+                    <div class="infosheet-container bg-gray-50 border border-gray-200 shadow-lg rounded-2xl md:rounded-3xl overflow-hidden relative">
                         
                         <!-- Image with better fit -->
                         <img src="https://i.postimg.cc/9F8wwdVJ/Bildschirmfoto-2026-02-12-um-17-47-55.png" 
@@ -271,25 +262,25 @@
                         
                         <!-- Permanent Overlay Button - Small, Bottom Right -->
                         <div class="absolute bottom-4 right-4 z-10">
-                            <div class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-xl flex items-center gap-2 animate-pulse-soft hover:scale-105 transition-transform">
+                            <div class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-xl flex items-center gap-2 animate-pulse-soft">
                                 <i data-lucide="download" class="w-4 h-4"></i>
                                 <span>Klick mich</span>
                             </div>
                         </div>
 
                         <!-- Hover Overlay (Subtle Darkening) -->
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <div class="absolute inset-0 bg-black/0 md:group-hover:bg-black/10 transition-colors duration-300"></div>
                     </div>
                 </a>
             </div>
         </section>
 
         <!-- Booking Section -->
-        <section id="booking" class="scroll-mt-32 fade-in-up delay-300">
-            <div class="mb-10 text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-6">
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Live Trainings</h2>
-                    <p class="text-gray-600">Wähle einen Termin. Klicke auf "Termin speichern", um den Kalendereintrag zu laden.</p>
+        <section id="booking" class="scroll-mt-28 md:scroll-mt-32 fade-in-up delay-300">
+            <div class="mb-8 md:mb-10 text-center md:text-left flex flex-col md:flex-row justify-between items-center md:items-end gap-6">
+                <div class="text-center md:text-left">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Live Trainings</h2>
+                    <p class="text-gray-600 text-sm md:text-base">Wähle einen Termin. Klicke auf "Termin speichern".</p>
                 </div>
                 
                 <!-- Month Selection Toggle -->
@@ -300,7 +291,7 @@
             </div>
 
             <!-- Grid Container -->
-            <div id="training-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-[200px]">
+            <div id="training-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 min-h-[200px]">
                 <!-- Cards will be injected here via JS -->
             </div>
             
@@ -314,13 +305,13 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-12">
+    <footer class="bg-white border-t border-gray-200 py-8 md:py-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-gray-500 text-sm mb-4">
+            <p class="text-gray-500 text-xs md:text-sm mb-4">
                 &copy; 2026 Google Retail Training. Internes Schulungsmaterial. Vertraulich.
             </p>
             <div class="flex justify-center gap-4 opacity-50 grayscale hover:grayscale-0 transition-all">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="h-6">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="h-5 md:h-6">
             </div>
         </div>
     </footer>
@@ -407,27 +398,27 @@
 
                     card.innerHTML = `
                         <div class="h-1.5 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-yellow-500"></div>
-                        <div class="p-6 flex-1 flex flex-col">
+                        <div class="p-5 md:p-6 flex-1 flex flex-col">
                             <div class="flex justify-between items-start mb-4">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                     ${session.duration} Min
                                 </span>
                             </div>
                             
-                            <h3 class="text-xl font-bold text-gray-900 mb-6 leading-snug">${session.title}</h3>
+                            <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-4 md:mb-6 leading-snug">${session.title}</h3>
                             
-                            <div class="space-y-3 mb-8 flex-1">
+                            <div class="space-y-3 mb-6 md:mb-8 flex-1">
                                 <div class="flex items-center text-gray-700">
                                     <i data-lucide="calendar" class="w-5 h-5 mr-3 text-blue-600"></i>
-                                    <span class="font-medium text-lg">${formatDateGerman(session.date)}</span>
+                                    <span class="font-medium text-base md:text-lg">${formatDateGerman(session.date)}</span>
                                 </div>
                                 <div class="flex items-center text-gray-700">
                                     <i data-lucide="clock" class="w-5 h-5 mr-3 text-blue-600"></i>
-                                    <span class="font-medium text-lg">${session.time} Uhr</span>
+                                    <span class="font-medium text-base md:text-lg">${session.time} Uhr</span>
                                 </div>
                             </div>
                             
-                            <button onclick="downloadICS(event, ${globalIndex})" class="w-full btn-outline py-2.5 px-4 rounded-full text-sm font-bold flex items-center justify-center gap-2 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-300">
+                            <button onclick="downloadICS(event, ${globalIndex})" class="w-full btn-outline py-2.5 px-4 rounded-full text-sm font-bold flex items-center justify-center gap-2 active:bg-blue-600 active:text-white transition-all duration-300 touch-manipulation">
                                 <i data-lucide="download" class="w-4 h-4"></i>
                                 Termin speichern
                             </button>
@@ -446,7 +437,7 @@
             attachTiltEffect();
         }
 
-        // 3D Tilt Effect Logic
+        // 3D Tilt Effect Logic (Desktop Only)
         function attachTiltEffect() {
             if (window.matchMedia("(min-width: 768px)").matches) {
                 document.querySelectorAll('.training-card').forEach(card => {
