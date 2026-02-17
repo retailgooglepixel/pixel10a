@@ -206,14 +206,16 @@
 <body>
 
     <!-- Header Section -->
-    <header class="relative w-full h-[50vh] min-h-[350px] md:h-[60vh] overflow-hidden">
+    <!-- Updated: Taller on mobile (h-[80vh]) for better portrait look, center object position -->
+    <header class="relative w-full h-[80vh] md:h-[60vh] overflow-hidden">
         <img src="https://i.postimg.cc/3JzSv9vW/Bildschirmfoto-2026-02-16-um-14-12-48.png" 
              alt="Pixel 10a Header" 
              class="absolute inset-0 w-full h-full object-cover object-center">
         
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        <!-- Stronger Gradient for mobile readability -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
         
-        <div class="absolute inset-0 flex flex-col justify-end items-center pb-20 md:pb-24 px-4 pointer-events-none">
+        <div class="absolute inset-0 flex flex-col justify-end items-center pb-24 md:pb-24 px-4 pointer-events-none">
             <a href="https://googleretailtraining.exceedlms.com/student/catalog" target="_blank" 
                class="pointer-events-auto px-6 py-3 md:px-8 md:py-4 text-sm md:text-lg font-medium inline-flex items-center gap-2 fade-in-up delay-100 transform active:scale-95 transition-transform animate-pulse-soft text-center max-w-xs md:max-w-none rounded-full shadow-lg hover:shadow-xl"
                style="background-color: #d9e3dc; color: #202124;">
@@ -224,7 +226,8 @@
     </header>
 
     <!-- Quick Navigation (Glass Tiles) -->
-    <div class="relative -mt-8 md:-mt-10 z-20 px-4 mb-12 md:mb-16">
+    <!-- Adjusted negative margin to overlap the taller header nicely -->
+    <div class="relative -mt-12 md:-mt-10 z-20 px-4 mb-12 md:mb-16">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             
             <!-- Tile 1: Training -->
@@ -280,11 +283,10 @@
                 </h2>
             </div>
             
-            <!-- Video Container: Aspect ratio adjusted for mobile (vertical) vs desktop (horizontal) -->
-            <div class="order-1 lg:order-2 aspect-[9/16] md:aspect-video w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gray-900/5 bg-gray-100 max-w-sm md:max-w-none mx-auto lg:mx-0">
-                <!-- YouTube Shorts Embed -->
+            <div class="order-1 lg:order-2 aspect-video w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gray-900/5 bg-gray-100">
+                <!-- Youtube Placeholder -->
                 <iframe class="w-full h-full" 
-                        src="https://www.youtube.com/embed/1v4h-IwptNg" 
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=placeholder" 
                         title="YouTube video player" 
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
