@@ -13,6 +13,14 @@
       gtag('js', new Date());
 
       gtag('config', 'G-T3JVDKE642');
+
+      // Helper function for custom events
+      function trackEvent(eventName, params = {}) {
+          if (typeof gtag === 'function') {
+              gtag('event', eventName, params);
+              console.log('Event tracked:', eventName, params); // For debugging
+          }
+      }
     </script>
 
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -222,11 +230,11 @@
              alt="Pixel 10a Header" 
              class="absolute inset-0 w-full h-full object-cover object-center">
         
-        <!-- Stronger Gradient for mobile readability -->
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
         
         <div class="absolute inset-0 flex flex-col justify-end items-center pb-24 md:pb-24 px-4 pointer-events-none">
             <a href="https://googleretailtraining.exceedlms.com/student/catalog" target="_blank" 
+               onclick="trackEvent('click_header_more_info')"
                class="pointer-events-auto px-6 py-3 md:px-8 md:py-4 text-sm md:text-lg font-medium inline-flex items-center gap-2 fade-in-up delay-100 transform active:scale-95 transition-transform animate-pulse-soft text-center max-w-xs md:max-w-none rounded-full shadow-lg hover:shadow-xl"
                style="background-color: #d9e3dc; color: #202124;">
                 <span>Du willst mehr zum Pixel 10a wissen? Klicke hier.</span>
@@ -240,7 +248,7 @@
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             
             <!-- Tile 1: Training -->
-            <a href="#booking" class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200 tap-highlight-transparent">
+            <a href="#booking" onclick="trackEvent('click_nav_trainings')" class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200 tap-highlight-transparent">
                 <div class="bg-brand-blue-light p-3 rounded-full text-brand-blue md:group-hover:bg-[#81a0f4] md:group-hover:text-white transition-colors shrink-0">
                     <i data-lucide="calendar-check" class="w-6 h-6"></i>
                 </div>
@@ -252,7 +260,9 @@
             </a>
 
             <!-- Tile 2: Neueste Funktionen -->
-            <a href="https://docs.google.com/presentation/d/1ylNj_EwhR0U7ukoVJKhYpDZwO7-iVckumRrs9bYQIYs/present?slide=id.p" target="_blank" class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200 tap-highlight-transparent">
+            <a href="https://docs.google.com/presentation/d/1ylNj_EwhR0U7ukoVJKhYpDZwO7-iVckumRrs9bYQIYs/present?slide=id.p" target="_blank" 
+               onclick="trackEvent('click_nav_features')"
+               class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200 tap-highlight-transparent">
                 <div class="bg-brand-yellow-light p-3 rounded-full text-brand-yellow md:group-hover:bg-[#fbbc04] md:group-hover:text-white transition-colors shrink-0">
                     <i data-lucide="sparkles" class="w-6 h-6"></i>
                 </div>
@@ -264,7 +274,7 @@
             </a>
 
             <!-- Tile 3: Gesprächs-Turbo -->
-            <a href="#infosheet" class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200">
+            <a href="#infosheet" onclick="trackEvent('click_nav_turbo')" class="glass-tile rounded-2xl p-4 md:p-6 flex items-center md:items-start gap-4 group cursor-pointer fade-in-up delay-200">
                 <div class="bg-brand-green-light p-3 rounded-full text-gray-600 md:group-hover:bg-[#d9e3dc] md:group-hover:text-gray-900 transition-colors shrink-0">
                     <i data-lucide="file-text" class="w-6 h-6"></i>
                 </div>
@@ -310,7 +320,9 @@
             </div>
 
             <div class="max-w-4xl mx-auto">
-                <a href="https://drive.google.com/file/d/1pHakm6Lv_ltn5AHbP-OA50wq4gMawkif/view" target="_blank" class="block group relative active:scale-[0.99] transition-transform">
+                <a href="https://drive.google.com/file/d/1pHakm6Lv_ltn5AHbP-OA50wq4gMawkif/view" target="_blank" 
+                   onclick="trackEvent('download_infosheet')"
+                   class="block group relative active:scale-[0.99] transition-transform">
                     <div class="infosheet-container bg-gray-50 border border-gray-200 shadow-lg rounded-2xl md:rounded-3xl overflow-hidden relative">
                         <img src="https://i.postimg.cc/9F8wwdVJ/Bildschirmfoto-2026-02-12-um-17-47-55.png" 
                              alt="Infosheet Preview" 
@@ -339,8 +351,8 @@
                 
                 <!-- Month Selection Toggle -->
                 <div class="toggle-container">
-                    <div id="btn-feb" class="toggle-btn active" onclick="setMonth('02')">Februar</div>
-                    <div id="btn-mar" class="toggle-btn" onclick="setMonth('03')">März</div>
+                    <div id="btn-feb" class="toggle-btn active" onclick="setMonth('02'); trackEvent('switch_month_feb');">Februar</div>
+                    <div id="btn-mar" class="toggle-btn" onclick="setMonth('03'); trackEvent('switch_month_mar');">März</div>
                 </div>
             </div>
 
@@ -380,7 +392,7 @@
                 </button>
 
                 <!-- Outlook Button -->
-                <a id="btn-outlook" href="#" target="_blank" class="w-full flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all group text-left">
+                <a id="btn-outlook" href="#" target="_blank" onclick="trackEvent('open_outlook')" class="w-full flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all group text-left">
                     <div class="bg-blue-100 text-blue-800 p-2 rounded-lg group-hover:bg-white transition-colors">
                         <i data-lucide="mail" class="w-5 h-5"></i>
                     </div>
@@ -391,7 +403,7 @@
                 </a>
 
                 <!-- Google Button -->
-                <a id="btn-google" href="#" target="_blank" class="w-full flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-[#ff5661] hover:bg-red-50 transition-all group text-left">
+                <a id="btn-google" href="#" target="_blank" onclick="trackEvent('open_google_calendar')" class="w-full flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-[#ff5661] hover:bg-red-50 transition-all group text-left">
                     <div class="bg-red-100 text-red-600 p-2 rounded-lg group-hover:bg-white transition-colors">
                         <i data-lucide="calendar" class="w-5 h-5"></i>
                     </div>
@@ -565,9 +577,13 @@
 
             // 3. ICS Button Logic
             document.getElementById('btn-ics').onclick = function() {
+                trackEvent('download_ics');
                 downloadICS(null, index);
                 closeModal();
             };
+
+            // Tracking Open Modal
+            trackEvent('open_calendar_modal', { session_title: session.title, session_date: session.date });
 
             // Show Modal
             modal.classList.add('open');
